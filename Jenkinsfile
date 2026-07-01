@@ -42,7 +42,7 @@ Job: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
 Build URL: ${env.BUILD_URL}
 """,
-                to: "YOUR_GMAIL@gmail.com"
+                to: "kaushikthalla@gmail.com"
             )
         }
 
