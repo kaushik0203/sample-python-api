@@ -1,55 +1,124 @@
-# Overview
+# Flask CI/CD Pipeline using Jenkins and GitHub Actions
 
-This is a simple Python API boilderplate
-using [Flask](http://flask.pocoo.org/) and [Flask-RESTPlus](https://flask-restplus.readthedocs.io/en/stable/).
-It uses [Pyenv](https://github.com/pyenv/pyenv) and [Pipenv](https://pipenv.readthedocs.io/en/latest/)
-for runtime and package management.
-It also uses [pytest](https://docs.pytest.org/en/latest/) and [pytest-flask](https://pytest-flask.readthedocs.io/en/latest/)
-for unit testing.
+## Project Overview
 
-You can find detailed documentation on this boilerplate's set-up [here](https://nikgrozev.com/2018/10/12/python-api-with-flask-and-flask-restplus/). 
+This project demonstrates Continuous Integration and Continuous Deployment (CI/CD) for a simple Flask application using:
 
-# Set Up
+- Jenkins Pipeline
+- GitHub Actions
+- Pytest for unit testing
+- GitHub Repository
+- AWS EC2 (Ubuntu 24.04)
 
-Install [Pyenv](https://github.com/pyenv/pyenv) following the [official installation instructions](https://github.com/pyenv/pyenv#installation).
+---
 
-Download the proper python version:
+## Technologies Used
 
-```bash
-# Installs the version from ".python-version" if not installed 
-# Can take some time.
-pyenv install
+- Python 3.12
+- Flask
+- Pytest
+- Jenkins
+- GitHub Actions
+- Git
+- Ubuntu 24.04
+- AWS EC2
+
+---
+
+## Jenkins CI/CD Pipeline
+
+The Jenkins pipeline consists of the following stages:
+
+1. Build
+   - Creates a Python virtual environment
+   - Installs dependencies using pip
+
+2. Test
+   - Executes unit tests using pytest
+
+3. Deploy
+   - Starts the Flask application after successful tests
+
+The pipeline is automatically triggered whenever changes are pushed to the **main** branch.
+
+Email notifications are configured using Gmail SMTP.
+
+---
+
+## GitHub Actions Workflow
+
+The GitHub Actions workflow performs:
+
+- Checkout Repository
+- Setup Python
+- Install Dependencies
+- Run Tests
+- Build Application
+- Deploy to Staging (staging branch)
+- Deploy to Production (Git tag)
+
+Repository Secrets used:
+
+- DEPLOY_KEY
+
+---
+
+## Repository Structure
+
+```
+.
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml
+├── Jenkinsfile
+├── app.py
+├── requirements.txt
+├── test_app.py
+└── README.md
 ```
 
-Install pipenv:
+---
+
+## How to Run Locally
 
 ```bash
-pip install --user pipenv
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pytest -v
+python3 app.py
 ```
 
-Install all dependencies
+---
 
-```bash
-pipenv install
-```
+## Jenkins Pipeline Stages
 
-# Run locally
+- Build
+- Test
+- Deploy
 
-```bash
-# If you haven't already, then start a pipenv shell
-pipenv shell
+---
 
-PYTHON_ENV=development python src/main.py
-```
+## GitHub Actions Jobs
 
-Visit Swagger UI on [http://localhost:5000/api/swagger](http://localhost:5000/api/swagger).
+- Test & Build
+- Deploy to Staging
+- Deploy to Production
 
-# Run unit tests
+---
 
+## Screenshots
 
-```bash
-# If you haven't already, then start a pipenv shell
-pipenv shell
+The repository includes screenshots demonstrating:
 
-python -m pytest
-```
+- Jenkins Pipeline Execution
+- Jenkins Email Notification
+- GitHub Actions Workflow
+- Staging Deployment
+- Production Deployment
+
+---
+
+## Author
+
+Kaushik
