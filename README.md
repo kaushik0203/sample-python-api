@@ -53,3 +53,4 @@ pipenv shell
 
 python -m pytest
 ```
+GitHub Actions staging deployment test.
