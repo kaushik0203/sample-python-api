@@ -34,24 +34,32 @@ jobs:
         run: |
           echo "Application build completed successfully."
 
-  deploy-staging:
+    deploy-staging:
     if: github.ref == 'refs/heads/staging'
     needs: test-build
     runs-on: ubuntu-latest
 
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+
     steps:
       - name: Deploy to Staging
         run: |
+          echo "Using deployment key..."
           echo "Deploying application to Staging Environment..."
           echo "Deployment completed."
 
-  deploy-production:
+    deploy-production:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: test-build
     runs-on: ubuntu-latest
 
+    env:
+      DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+
     steps:
       - name: Deploy to Production
         run: |
+          echo "Using deployment key..."
           echo "Deploying application to Production Environment..."
           echo "Deployment completed."
